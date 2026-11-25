@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Verse log</title>
+<link rel="stylesheet" href="pages.css">
+<style>
+  .entry { border-top: 1px solid var(--line); padding: 12px 0; }
+  .entry:first-child { border-top: 0; }
+  .entry h3 { font-size: 16px; margin: 0; display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+  .entry .meta { font-size: 13px; color: var(--muted); }
+  .entry .text { margin: 6px 0 0; }
+  .entry .text sup { color: var(--muted); font-size: 11px; margin-right: 2px; }
+  .entry .missing { margin: 6px 0 0; color: var(--muted); font-style: italic; }
+  .entry .actions { margin-top: 6px; display: flex; gap: 14px; }
+  .entry textarea { margin-top: 6px; min-height: 90px; }
+  details summary { cursor: pointer; font-weight: 600; }
+  #paste { min-height: 110px; margin: 8px 0; }
+</style>
+</head>
+<body>
+<main>
+  <div class="bar">
+    <h1>Verse log</h1>
+    <span class="spacer"></span>
+    <a class="button" href="practice.html">Practice ›</a>
+  </div>
+  <p class="muted" id="count">Loading…</p>
+
+  <section class="panel" id="waiting" hidden>
+    <h2 id="waitingTitle"></h2>
+    <p class="small muted">Open them on Blue Letter Bible, copy the text with BLB's <b>Copy to Clipboard</b>,
+      and paste it in the box below, or type it into a passage. Only passages with text can be practised.</p>
+    <div class="bar" id="waitingButtons"></div>
+  </section>
+
+  <section class="panel">
+    <details id="pasteBox">
+      <summary>Paste verse text copied from Blue Letter Bible</summary>
+      <p class="small muted">On BLB's Multi-Verse page, click <b>Copy to Clipboard</b>, then paste here. Lines look like
+        <code>[Romans 8:28-30 ESV] – 28 And we know…</code>. Passages not in the log yet are added.</p>
+      <textarea id="paste" placeholder="Paste here"></textarea>
+      <div class="bar"><button class="primary" id="pasteBtn">Add to log</button></div>
+      <div id="pasteNote"></div>
+    </details>
+  </section>
+
+  <section class="panel">
+    <h2>Markdown file</h2>
+    <p class="small" id="fileStatus"></p>
+    <label class="check"><input type="checkbox" id="keepFile">
+      <span>Keep <code>verse-log.md</code> in my Downloads folder (rewritten after every change; edit text here, not in the file)</span></label>
+    <label class="check"><input type="checkbox" id="logOpened">
+      <span>Add references to the log when I open or copy them from the toolbar button (also the popup's "Save these references to the verse log" box)</span></label>
+    <div class="bar" style="margin-top:8px">
+      <button id="saveNow">Save the file now</button>
+      <button id="copyMd">Copy Markdown</button>
+      <button id="importBtn">Import a .md file…</button>
+      <input type="file" id="importFile" accept=".md,.markdown,.txt,text/markdown,text/plain" hidden>
+    </div>
+    <div id="fileNote"></div>
+  </section>
+
+  <section class="panel">
+    <h2>Passages, in the order logged</h2>
+    <div id="list"></div>
+  </section>
+
+  <div class="bar"><span class="spacer"></span><button class="danger" id="clearAll">Clear the whole log…</button></div>
+</main>
+<script src="versecounts.js"></script>
+<script src="refs.js"></script>
+<script src="grab.js"></script>
+<script src="verselog.js"></script>
+<script src="store.js"></script>
+<script src="log.js"></script>
+</body>
+</html>

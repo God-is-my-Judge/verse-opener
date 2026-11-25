@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Verse practice</title>
+<link rel="stylesheet" href="pages.css">
+<style>
+  .seg { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+  .seg button { border: 0; border-radius: 0; padding: 7px 12px; }
+  .seg button + button { border-left: 1px solid var(--line); }
+  .seg button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); font-weight: 600; }
+  select { font: inherit; font-size: 14px; padding: 6px 8px; border-radius: 7px; border: 1px solid var(--line); background: var(--bg); color: inherit; max-width: 100%; }
+  .card { border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; margin: 14px 0; }
+  .card h2 { font-size: 18px; margin: 0; }
+  .steps { display: flex; gap: 6px; margin: 6px 0 12px; }
+  .steps span { height: 5px; flex: 1; border-radius: 3px; background: var(--line); }
+  .steps span.done { background: var(--ok); }
+  .steps span.now { background: var(--accent); }
+  .verse { font-size: 19px; line-height: 1.9; font-family: Georgia, "Times New Roman", serif; margin: 4px 0 12px; }
+  .slot { display: inline; border-bottom: 2px dashed var(--tile-line); padding: 0 2px; }
+  .slot.empty { color: var(--muted); font-family: system-ui, sans-serif; font-size: 14px; }
+  .tile { font: 15px/1.3 system-ui, sans-serif; border: 1px solid var(--tile-line); background: var(--tile); color: inherit;
+          border-radius: 7px; padding: 6px 10px; margin: 3px 2px; cursor: pointer; }
+  .slot .tile { margin: 2px 1px; padding: 3px 8px; }
+  .pool { display: flex; flex-wrap: wrap; gap: 4px; min-height: 44px; padding: 8px 0 12px; }
+  .pool .tile.used { visibility: hidden; }
+  .reading { background: var(--soft); border-radius: 8px; padding: 10px 12px; margin-top: 10px; font-family: Georgia, serif; }
+  #drop.over { outline: 2px dashed var(--accent); outline-offset: 4px; }
+  @media (max-width: 520px) { .verse { font-size: 17px; } .card { padding: 14px; } }
+</style>
+</head>
+<body>
+<main>
+  <div class="bar">
+    <h1>Verse practice</h1>
+    <span class="spacer"></span>
+    <a class="button" id="toLog" href="log.html" hidden>‹ Verse log</a>
+    <button id="otherFile" hidden>Open another file…</button>
+  </div>
+
+  <section class="panel" id="loader" hidden>
+    <h2>Open your verse log</h2>
+    <p>Choose <code>verse-log.md</code> (the extension keeps it in <code>Downloads/Scripture memory</code>), or drop it on this box.
+      It is read here on your device: nothing is uploaded. Any Scripture Way-Pack file works too.</p>
+    <button class="primary" id="openFile">Choose file…</button>
+    <div id="loadNote"></div>
+  </section>
+  <input type="file" id="fileInput" accept=".md,.markdown,.txt,text/markdown,text/plain" hidden>
+
+  <section class="panel" id="empty" hidden>
+    <h2>No verses with text yet</h2>
+    <p id="emptyText"></p>
+  </section>
+
+  <section id="practice" hidden>
+    <div class="bar">
+      <div class="seg" role="group" aria-label="Level">
+        <button data-level="phrases" title="Put about four phrases in order">Phrases</button>
+        <button data-level="words" title="Put every word in order; a few decoys are mixed in">Words</button>
+        <button data-level="type" title="Type it; capitals and punctuation don't matter">Type it</button>
+      </div>
+      <span class="spacer"></span>
+      <select id="pick" aria-label="Passage"></select>
+      <button id="next">Next ›</button>
+    </div>
+
+    <div class="card">
+      <div class="bar"><h2 id="refTitle"></h2><span class="spacer"></span><span class="stars" id="stars" title="Level reached: phrases, words, typed"></span></div>
+      <div class="steps" id="steps"></div>
+      <p class="small muted" id="stepText"></p>
+      <div class="verse" id="verse"></div>
+      <div id="typeBox" hidden><textarea id="typed" rows="3" placeholder="Type the missing words" spellcheck="false" autocapitalize="off" autocomplete="off"></textarea></div>
+      <div class="pool" id="pool" aria-label="Pieces to choose from"></div>
+      <div class="bar">
+        <button class="primary" id="check">Check</button>
+        <button id="undo">Undo</button>
+        <button id="read">Read the verse</button>
+        <span class="spacer"></span>
+        <button class="link" id="skip">Skip</button>
+      </div>
+      <div id="feedback" aria-live="polite"></div>
+      <div class="reading" id="reading" hidden></div>
+    </div>
+    <p class="small muted">Each verse has three steps: finish it from its first half, start it from its second half,
+      then the whole verse from its reference. Stars show the levels you've completed: Phrases ★, Words ★★, Type it ★★★.</p>
+  </section>
+</main>
+<script src="versecounts.js"></script>
+<script src="refs.js"></script>
+<script src="verselog.js"></script>
+<script src="recall.js"></script>
+<script src="practice.js"></script>
+</body>
+</html>

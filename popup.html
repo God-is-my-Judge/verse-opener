@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Bible references</title>
+<style>
+  :root { color-scheme: light dark; --ink:#1b2430; --muted:#5d6b7c; --line:#d5dbe3; --accent:#1f4e8c; --bg:#fff; }
+  @media (prefers-color-scheme: dark) { :root { --ink:#e7ecf2; --muted:#9aa7b6; --line:#3a4350; --accent:#7fb0ee; --bg:#1c2128; } }
+  body { margin:0; width:320px; font:13px/1.4 system-ui, sans-serif; color:var(--ink); background:var(--bg); }
+  header { padding:10px 12px 8px; border-bottom:1px solid var(--line); }
+  h1 { margin:0; font-size:14px; }
+  #status { color:var(--muted); margin-top:2px; }
+  #list { max-height:260px; overflow:auto; margin:0; padding:6px 12px; list-style:none; }
+  #list label { display:flex; gap:8px; padding:3px 0; align-items:center; cursor:pointer; }
+  .row { display:flex; gap:8px; align-items:center; padding:6px 12px; }
+  .row.top { border-top:1px solid var(--line); }
+  input[type=text] { width:72px; padding:4px 6px; font:inherit; text-transform:uppercase; border:1px solid var(--line); border-radius:4px; background:transparent; color:inherit; }
+  button { font:inherit; padding:6px 10px; border-radius:5px; border:1px solid var(--line); background:transparent; color:inherit; cursor:pointer; }
+  button.primary { background:var(--accent); border-color:var(--accent); color:#fff; flex:1; font-weight:600; }
+  @media (prefers-color-scheme: dark) { button.primary { color:#10151b; } }
+  button:disabled { opacity:.5; cursor:default; }
+  .link { border:0; padding:0; color:var(--accent); text-decoration:underline; }
+  .spacer { flex:1; }
+  #warn, #fileWarn { color:#b45309; padding:0 12px 8px; display:none; }
+  footer { display:flex; gap:14px; align-items:center; border-top:1px solid var(--line); padding:8px 12px; color:var(--muted); }
+  footer .link { font-weight:600; }
+  #logged { margin-left:auto; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Bible references</h1>
+  <div id="status" role="status" aria-live="polite">Scanning…</div>
+</header>
+<ul id="list"></ul>
+<div class="row top">
+  <button class="link" id="all">All</button>
+  <button class="link" id="none">None</button>
+  <span class="spacer"></span>
+  <label for="translation">Translation</label>
+  <input type="text" id="translation" maxlength="8" spellcheck="false" title="Blue Letter Bible code, e.g. KJV, ESV, NKJV, NASB20, LSB, CSB, NIV, NLT">
+</div>
+<div class="row">
+  <label><input type="checkbox" id="context"> Include one verse before and after</label>
+</div>
+<div class="row">
+  <label title="Adds the ticked references to the verse log (and its Markdown file) when you open or copy them"><input type="checkbox" id="logIt"> Save these references to the verse log</label>
+</div>
+<div class="row">
+  <button class="primary" id="open" disabled>Open in Blue Letter Bible</button>
+  <button id="copy" disabled title="Copy the list, e.g. to paste into BLB's Multi-Verse Retrieval tool">Copy</button>
+</div>
+<div id="warn"></div>
+<div id="fileWarn"></div>
+<footer>
+  <button class="link" id="openLog">Verse log</button>
+  <button class="link" id="openPractice">Practice</button>
+  <a class="link" href="privacy.html" target="_blank" rel="noopener">Privacy</a>
+  <span id="logged"></span>
+</footer>
+<script src="versecounts.js"></script>
+<script src="refs.js"></script>
+<script src="grab.js"></script>
+<script src="verselog.js"></script>
+<script src="store.js"></script>
+<script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+{
+  "name": "verse-opener",
+  "version": "0.4.0",
+  "private": true,
+  "description": "Verse Opener browser extension: tests and store images (the extension itself has no build step).",
+  "license": "Apache-2.0",
+  "scripts": {
+    "test": "node test/refs.test.js && node test/recall.test.js && node test/verselog.test.js && node test/browser.test.mjs",
+    "zip": "bash store/make-zip.sh",
+    "images": "node store/make-images.mjs"
+  },
+  "devDependencies": {
+    "puppeteer-core": "^25.17.0"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "manifest_version": 3,
+  "name": "Verse Opener: Bible references to Blue Letter Bible",
+  "short_name": "Verse Opener",
+  "version": "0.4.0",
+  "description": "Opens every Bible reference on a page together on Blue Letter Bible. Optional verse log and memory practice.",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage",
+    "downloads"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Find Bible references on this page",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "commands": {
+    "open-all": {
+      "suggested_key": {
+        "default": "Alt+Shift+B"
+      },
+      "description": "Open all references on this page in Blue Letter Bible"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}
